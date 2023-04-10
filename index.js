@@ -24,7 +24,7 @@ app.post("/bmi", (req, res) => {
 app.post("/", (req, res) => {
     const num1 = Number(req.body.num1);
     const num2 = Number(req.body.num2);
-    const operator = req.body.operator;
+    let operator = req.body.operator;
     if(operator !== null) operator = operator.toLowerCase();
     let result = 0;
     switch (operator) {
@@ -43,7 +43,7 @@ app.post("/", (req, res) => {
         default:
             result = "Please enter a valid operator";
     }
-    result = result.toFixed(2);
+    if(result !== "Please enter a valid operator") result = result.toFixed(2);
     res.send("<h1>The result is " + result + "</h1> <br> <a href='/'>Back to home</a>");
 }); 
 
