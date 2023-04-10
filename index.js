@@ -15,19 +15,18 @@ app.get("/bmi", (req, res) => {
 });
 
 app.post("/bmi", (req, res) => { 
-    var weight = parseFloat(req.body.weight);
-    var height = parseFloat(req.body.height);
-    var bmi = weight / (height * height);
-    bmi = bmi.toFixed(2);
+    const weight = parseFloat(req.body.weight);
+    const height = parseFloat(req.body.height);
+    const bmi = (weight / (height * height)).toFixed(2);
     res.send("<h1>Your BMI is " + bmi + "</h1> <br> <a href='/bmi'>Back to home</a>");
 });
 
 app.post("/", (req, res) => {
-    var num1 = Number(req.body.num1);
-    var num2 = Number(req.body.num2);
-    var operator = req.body.operator;
+    const num1 = Number(req.body.num1);
+    const num2 = Number(req.body.num2);
+    const operator = req.body.operator;
     if(operator !== null) operator = operator.toLowerCase();
-    var result = 0;
+    let result = 0;
     switch (operator) {
         case "add":
             result = num1 + num2;
@@ -45,10 +44,12 @@ app.post("/", (req, res) => {
             result = "Please enter a valid operator";
     }
     result = result.toFixed(2);
-    res.send("<h1>Thgit state result is " + result + "</h1> <br> <a href='/'>Back to home</a>");
+    res.send("<h1>The result is " + result + "</h1> <br> <a href='/'>Back to home</a>");
 }); 
 
-app.listen(3000, () => {
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => {
     console.log("Server started on port 3000");
 });
 
